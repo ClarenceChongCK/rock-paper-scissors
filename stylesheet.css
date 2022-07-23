@@ -1,0 +1,28 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+}
+
+.playerMove {
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20%;
+}
+
+button {
+    padding: 48px;
+    font-size: large;
+}
+
+.scoreboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5%;
+    font-size: 48px;
+}

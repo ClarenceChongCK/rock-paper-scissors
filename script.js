@@ -1,8 +1,52 @@
-const moves = ["rock", "paper", "scissor"]
+const moves = ["rock", "paper", "scissors"]
+
+let playerWins = 0;
+let computerWins = 0;
+
+const buttons = document.querySelectorAll('button');
+
+const welcome = "Welcome to Rock Paper Scissors!"
+
+const resetButton = document.querySelector('#reset');
+
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        round(button.id,getComputerChoice());
+    });
+});
+
+resetButton.addEventListener('click', () => {
+    reset();
+});
 
 function getComputerChoice() {
     const temp = Math.floor(Math.random() * 3);
     return moves[temp];
+}
+
+function winCondition() {
+    if (playerWins == 5) {
+        document.getElementsByClassName("scoreboard")[0].textContent = "YOU WIN";
+        document.querySelector('#rock').disabled = true;
+        document.querySelector('#scissors').disabled = true;
+        document.querySelector('#paper').disabled = true;
+    } else if( computerWins == 5) {
+        document.getElementsByClassName("scoreboard")[0].textContent = "YOU LOSE";
+        document.querySelector('#rock').disabled = true;
+        document.querySelector('#scissors').disabled = true;
+        document.querySelector('#paper').disabled = true;
+    } else {
+        document.getElementsByClassName("scoreboard")[0].textContent = `YOU: ${playerWins}     CPU: ${computerWins}`;
+    }
+}
+
+function reset() {
+    playerWins = 0;
+    computerWins = 0;
+    document.querySelector('#rock').disabled = false;
+        document.querySelector('#scissors').disabled = false;
+        document.querySelector('#paper').disabled = false;
+    document.getElementsByClassName("scoreboard")[0].textContent = welcome;
 }
 
 function round(playerSelection, computerSelection) {
@@ -11,15 +55,17 @@ function round(playerSelection, computerSelection) {
             switch (computerSelection) {
                 case "rock" :
                     console.log("Draw");
-                    //return "Draw";
+                    winCondition();
                     break;
                 case "paper" :
                     console.log("Lose");
-                    //return "Lose";
+                    computerWins += 1;
+                    winCondition();
                     break;
-                case "scissor" :
+                case "scissors" :
                     console.log("Win");
-                    //return "Win";
+                    playerWins += 1;
+                    winCondition();
                     break;
             }
             break;
@@ -27,31 +73,36 @@ function round(playerSelection, computerSelection) {
             switch (computerSelection) {
                 case "rock" :
                     console.log("Win");
-                    //return "Win";
+                    playerWins += 1;
+                    winCondition();
                     break;
                 case "paper" :
                     console.log("Draw");
-                    //return "Draw";
+                    computerWins += 1;
+                    winCondition();
                     break;
-                case "scissor" :
+                case "scissors" :
                     console.log("Lose");
-                    //return "Lose";
+                    winCondition();
+                
                     break;
             }
             break;
-        case "scissor" :
+        case "scissors" :
             switch (computerSelection) {
                 case "rock" :
                     console.log("Lose");
-                    //return "Lose";
+                    computerWins += 1;
+                    winCondition();
                     break;
                 case "paper" :
                     console.log("Win");
-                    //return "Win";
+                    playerWins += 1;
+                    winCondition();
                     break;
-                case "scissor" :
+                case "scissors" :
                     console.log("Draw");
-                    //return "Draw";
+                    winCondition();
                     break;
             }
             break;
@@ -60,10 +111,10 @@ function round(playerSelection, computerSelection) {
     }
 }
 
-function game() {
-    for (let i = 0; i < 5; i++) {
-        let computer = getComputerChoice();
-        round("Rock", computer);
-    }
-}
+// function game() {
+//     for (let i = 0; i < 5; i++) {
+//         let computer = getComputerChoice();
+//         round("Rock", computer);
+//     }
+// }
 
